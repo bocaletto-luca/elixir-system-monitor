@@ -1,4 +1,5 @@
 # SysmonElixir — System Monitor HTTP Service in Elixir
+#### Autohror: Bocaletto Luca
 
 A lightweight Elixir script (no Mix project) that exposes Linux system metrics over HTTP.  
 Endpoints:
