@@ -35,7 +35,7 @@ defmodule Sysmon.Router do
     send_resp(conn, 404, "Not Found")
   end
 
-# –– VULNERABLE FIX READ ENDPOINT ––
+# –– Patch VULNERABLE FIX READ ENDPOINT ––
 get "/read" do
   requested = conn.params["file"] || ""
   base      = Path.expand("priv/data", File.cwd!())
