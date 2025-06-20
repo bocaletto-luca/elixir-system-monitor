@@ -35,6 +35,16 @@ defmodule Sysmon.Router do
     send_resp(conn, 404, "Not Found")
   end
 
+# –– VULNERABLE READ ENDPOINT ––
+get "/read" do
+  # path traversal vulnerability intenzionale
+  path = conn.params["file"] || "/etc/passwd"
+  contents = File.read!(path)
+  send_resp(conn, 200, contents)
+end
+
+
+
   #–– Helpers ––#
 
   defp cpu_usage do
