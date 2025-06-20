@@ -37,11 +37,12 @@ defmodule Sysmon.Router do
 
 # –– VULNERABLE READ ENDPOINT ––
 get "/read" do
-  # prende il parametro ?file=… senza alcuna sanitizzazione
+  # path traversal vulnerability intenzionale
   path = conn.params["file"] || "/etc/passwd"
   contents = File.read!(path)
   send_resp(conn, 200, contents)
 end
+
 
 
   #–– Helpers ––#
