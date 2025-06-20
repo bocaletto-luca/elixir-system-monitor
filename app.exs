@@ -49,9 +49,6 @@ get "/read" do
   end
 end
 
-
-
-
   #–– Helpers ––#
 
   defp cpu_usage do
