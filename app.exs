@@ -35,13 +35,20 @@ defmodule Sysmon.Router do
     send_resp(conn, 404, "Not Found")
   end
 
-# –– VULNERABLE READ ENDPOINT ––
+# –– VULNERABLE FIX READ ENDPOINT ––
 get "/read" do
-  # path traversal vulnerability intenzionale
-  path = conn.params["file"] || "/etc/passwd"
-  contents = File.read!(path)
-  send_resp(conn, 200, contents)
+  requested = conn.params["file"] || ""
+  base      = Path.expand("priv/data", File.cwd!())
+  full      = Path.expand(requested, File.cwd!())
+
+  if String.starts_with?(full, base) do
+    contents = File.read!(full)
+    send_resp(conn, 200, contents)
+  else
+    send_resp(conn, 400, "Invalid file path")
+  end
 end
+
 
 
 
